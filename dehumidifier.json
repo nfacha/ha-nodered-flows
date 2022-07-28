@@ -1,0 +1,772 @@
+[
+    {
+      "id": "a58c154f471cb0ca",
+      "type": "tab",
+      "label": "Dehumidifier",
+      "disabled": false,
+      "info": "",
+      "env": [
+        {
+          "name": "triggerHumidity",
+          "value": "75",
+          "type": "num"
+        },
+        {
+          "name": "maxTemp",
+          "value": "26",
+          "type": "num"
+        }
+      ]
+    },
+    {
+      "id": "3af2606329a22896",
+      "type": "server-state-changed",
+      "z": "a58c154f471cb0ca",
+      "name": "Room Window",
+      "server": "",
+      "version": 4,
+      "exposeToHomeAssistant": false,
+      "haConfig": [
+        {
+          "property": "name",
+          "value": ""
+        },
+        {
+          "property": "icon",
+          "value": ""
+        }
+      ],
+      "entityidfilter": "binary_sensor.bedroom_window_contact",
+      "entityidfiltertype": "exact",
+      "outputinitially": false,
+      "state_type": "str",
+      "haltifstate": "",
+      "halt_if_type": "str",
+      "halt_if_compare": "is",
+      "outputs": 1,
+      "output_only_on_state_change": false,
+      "for": "15",
+      "forType": "num",
+      "forUnits": "seconds",
+      "ignorePrevStateNull": false,
+      "ignorePrevStateUnknown": false,
+      "ignorePrevStateUnavailable": false,
+      "ignoreCurrentStateUnknown": false,
+      "ignoreCurrentStateUnavailable": false,
+      "outputProperties": [
+        {
+          "property": "payload",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "entityState"
+        },
+        {
+          "property": "data",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "eventData"
+        },
+        {
+          "property": "topic",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "triggerId"
+        }
+      ],
+      "x": 100,
+      "y": 360,
+      "wires": [
+        [
+          "c1f6704879ead4e7"
+        ]
+      ]
+    },
+    {
+      "id": "9d4c328bc00fe202",
+      "type": "server-state-changed",
+      "z": "a58c154f471cb0ca",
+      "name": "Kitchen Window",
+      "server": "",
+      "version": 4,
+      "exposeToHomeAssistant": false,
+      "haConfig": [
+        {
+          "property": "name",
+          "value": ""
+        },
+        {
+          "property": "icon",
+          "value": ""
+        }
+      ],
+      "entityidfilter": "binary_sensor.kitchen_window_contact",
+      "entityidfiltertype": "exact",
+      "outputinitially": false,
+      "state_type": "str",
+      "haltifstate": "",
+      "halt_if_type": "str",
+      "halt_if_compare": "is",
+      "outputs": 1,
+      "output_only_on_state_change": false,
+      "for": "15",
+      "forType": "num",
+      "forUnits": "seconds",
+      "ignorePrevStateNull": false,
+      "ignorePrevStateUnknown": false,
+      "ignorePrevStateUnavailable": false,
+      "ignoreCurrentStateUnknown": false,
+      "ignoreCurrentStateUnavailable": false,
+      "outputProperties": [
+        {
+          "property": "payload",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "entityState"
+        },
+        {
+          "property": "data",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "eventData"
+        },
+        {
+          "property": "topic",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "triggerId"
+        }
+      ],
+      "x": 100,
+      "y": 420,
+      "wires": [
+        [
+          "919f29dfc52bbd18"
+        ]
+      ]
+    },
+    {
+      "id": "dba8b5d535b97e80",
+      "type": "server-state-changed",
+      "z": "a58c154f471cb0ca",
+      "name": "Kitchen Door",
+      "server": "",
+      "version": 4,
+      "exposeToHomeAssistant": false,
+      "haConfig": [
+        {
+          "property": "name",
+          "value": ""
+        },
+        {
+          "property": "icon",
+          "value": ""
+        }
+      ],
+      "entityidfilter": "binary_sensor.kitchen_door_contact",
+      "entityidfiltertype": "exact",
+      "outputinitially": false,
+      "state_type": "str",
+      "haltifstate": "",
+      "halt_if_type": "str",
+      "halt_if_compare": "is",
+      "outputs": 1,
+      "output_only_on_state_change": false,
+      "for": "15",
+      "forType": "num",
+      "forUnits": "seconds",
+      "ignorePrevStateNull": false,
+      "ignorePrevStateUnknown": false,
+      "ignorePrevStateUnavailable": false,
+      "ignoreCurrentStateUnknown": false,
+      "ignoreCurrentStateUnavailable": false,
+      "outputProperties": [
+        {
+          "property": "payload",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "entityState"
+        },
+        {
+          "property": "data",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "eventData"
+        },
+        {
+          "property": "topic",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "triggerId"
+        }
+      ],
+      "x": 90,
+      "y": 480,
+      "wires": [
+        [
+          "4185a22d9af88e05"
+        ]
+      ]
+    },
+    {
+      "id": "c1f6704879ead4e7",
+      "type": "change",
+      "z": "a58c154f471cb0ca",
+      "name": "",
+      "rules": [
+        {
+          "t": "set",
+          "p": "room_window",
+          "pt": "global",
+          "to": "payload",
+          "tot": "msg"
+        }
+      ],
+      "action": "",
+      "property": "",
+      "from": "",
+      "to": "",
+      "reg": false,
+      "x": 330,
+      "y": 360,
+      "wires": [
+        [
+          "8c9cfc5735eeb2cc"
+        ]
+      ]
+    },
+    {
+      "id": "919f29dfc52bbd18",
+      "type": "change",
+      "z": "a58c154f471cb0ca",
+      "name": "",
+      "rules": [
+        {
+          "t": "set",
+          "p": "kitchen_window",
+          "pt": "global",
+          "to": "payload",
+          "tot": "msg"
+        }
+      ],
+      "action": "",
+      "property": "",
+      "from": "",
+      "to": "",
+      "reg": false,
+      "x": 330,
+      "y": 420,
+      "wires": [
+        [
+          "8c9cfc5735eeb2cc"
+        ]
+      ]
+    },
+    {
+      "id": "4185a22d9af88e05",
+      "type": "change",
+      "z": "a58c154f471cb0ca",
+      "name": "",
+      "rules": [
+        {
+          "t": "set",
+          "p": "kitchen_door",
+          "pt": "global",
+          "to": "payload",
+          "tot": "msg"
+        }
+      ],
+      "action": "",
+      "property": "",
+      "from": "",
+      "to": "",
+      "reg": false,
+      "x": 330,
+      "y": 480,
+      "wires": [
+        [
+          "8c9cfc5735eeb2cc"
+        ]
+      ]
+    },
+    {
+      "id": "dac77656d6c7bc7a",
+      "type": "time-range-switch",
+      "z": "a58c154f471cb0ca",
+      "name": "Dehumidifier Time (Work Day)",
+      "lat": "",
+      "lon": "",
+      "startTime": "09:00",
+      "endTime": "23:01",
+      "startOffset": 0,
+      "endOffset": 0,
+      "x": 1010,
+      "y": 280,
+      "wires": [
+        [
+          "155de0d91079a3da"
+        ],
+        [
+          "1d9f12da92cc2b96"
+        ]
+      ]
+    },
+    {
+      "id": "5949949fe9b30609",
+      "type": "api-call-service",
+      "z": "a58c154f471cb0ca",
+      "name": "Dehumidifier Off",
+      "server": "",
+      "version": 5,
+      "debugenabled": false,
+      "domain": "homeassistant",
+      "service": "turn_off",
+      "areaId": [],
+      "deviceId": [
+        "f6c1fe0d9198abc27e09d5bb43cffc01"
+      ],
+      "entityId": [],
+      "data": "",
+      "dataType": "jsonata",
+      "mergeContext": "",
+      "mustacheAltTags": false,
+      "outputProperties": [],
+      "queue": "none",
+      "x": 2320,
+      "y": 280,
+      "wires": [
+        []
+      ]
+    },
+    {
+      "id": "155de0d91079a3da",
+      "type": "switch",
+      "z": "a58c154f471cb0ca",
+      "name": "IsHumid?",
+      "property": "payload",
+      "propertyType": "msg",
+      "rules": [
+        {
+          "t": "gte",
+          "v": "triggerHumidity",
+          "vt": "env"
+        },
+        {
+          "t": "else"
+        }
+      ],
+      "checkall": "true",
+      "repair": false,
+      "outputs": 2,
+      "x": 1320,
+      "y": 180,
+      "wires": [
+        [
+          "485be75e87315a04"
+        ],
+        [
+          "1d9f12da92cc2b96"
+        ]
+      ]
+    },
+    {
+      "id": "485be75e87315a04",
+      "type": "and-gate",
+      "z": "a58c154f471cb0ca",
+      "name": "JoinDoors",
+      "rules": [
+        {
+          "t": "eq",
+          "v": "off",
+          "vt": "str",
+          "propertyType": "global",
+          "property": "room_window"
+        },
+        {
+          "t": "eq",
+          "v": "off",
+          "vt": "str",
+          "propertyType": "global",
+          "property": "kitchen_window"
+        },
+        {
+          "t": "eq",
+          "v": "off",
+          "vt": "str",
+          "propertyType": "global",
+          "property": "kitchen_door"
+        }
+      ],
+      "outputTopic": "",
+      "gateType": "and",
+      "emitOnlyIfTrue": false,
+      "x": 1500,
+      "y": 160,
+      "wires": [
+        [
+          "284761cb7f40c8c6"
+        ]
+      ]
+    },
+    {
+      "id": "284761cb7f40c8c6",
+      "type": "switch",
+      "z": "a58c154f471cb0ca",
+      "name": "All Closed?",
+      "property": "bool",
+      "propertyType": "msg",
+      "rules": [
+        {
+          "t": "true"
+        },
+        {
+          "t": "else"
+        }
+      ],
+      "checkall": "true",
+      "repair": false,
+      "outputs": 2,
+      "x": 1690,
+      "y": 160,
+      "wires": [
+        [
+          "8e670822ee18694c"
+        ],
+        [
+          "1d9f12da92cc2b96"
+        ]
+      ]
+    },
+    {
+      "id": "c4069e590dc2de24",
+      "type": "api-call-service",
+      "z": "a58c154f471cb0ca",
+      "name": "Dehumidifier On",
+      "server": "",
+      "version": 5,
+      "debugenabled": false,
+      "domain": "homeassistant",
+      "service": "turn_on",
+      "areaId": [],
+      "deviceId": [
+        "f6c1fe0d9198abc27e09d5bb43cffc01"
+      ],
+      "entityId": [],
+      "data": "",
+      "dataType": "jsonata",
+      "mergeContext": "",
+      "mustacheAltTags": false,
+      "outputProperties": [],
+      "queue": "none",
+      "x": 2320,
+      "y": 100,
+      "wires": [
+        []
+      ]
+    },
+    {
+      "id": "a7823839fd0afad8",
+      "type": "inject",
+      "z": "a58c154f471cb0ca",
+      "name": "Every 15 Minutes",
+      "props": [
+        {
+          "p": "payload"
+        },
+        {
+          "p": "topic",
+          "vt": "str"
+        }
+      ],
+      "repeat": "900",
+      "crontab": "",
+      "once": true,
+      "onceDelay": "10",
+      "topic": "",
+      "payload": "",
+      "payloadType": "date",
+      "x": 310,
+      "y": 260,
+      "wires": [
+        [
+          "8c9cfc5735eeb2cc"
+        ]
+      ]
+    },
+    {
+      "id": "8c9cfc5735eeb2cc",
+      "type": "weekday",
+      "z": "a58c154f471cb0ca",
+      "name": "Work Day",
+      "sun": false,
+      "mon": true,
+      "tue": true,
+      "wed": true,
+      "thu": true,
+      "fri": true,
+      "sat": false,
+      "x": 620,
+      "y": 320,
+      "wires": [
+        [
+          "dac77656d6c7bc7a"
+        ],
+        [
+          "999cdda704ea815c"
+        ]
+      ]
+    },
+    {
+      "id": "999cdda704ea815c",
+      "type": "time-range-switch",
+      "z": "a58c154f471cb0ca",
+      "name": "Dehumidifier Time (Weekend)",
+      "lat": "",
+      "lon": "",
+      "startTime": "12:59",
+      "endTime": "23:01",
+      "startOffset": 0,
+      "endOffset": 0,
+      "x": 1010,
+      "y": 360,
+      "wires": [
+        [
+          "155de0d91079a3da"
+        ],
+        [
+          "1d9f12da92cc2b96"
+        ]
+      ]
+    },
+    {
+      "id": "0d77999f12bcf3f6",
+      "type": "server-state-changed",
+      "z": "a58c154f471cb0ca",
+      "name": "Dehumidifier Override",
+      "server": "",
+      "version": 4,
+      "exposeToHomeAssistant": false,
+      "haConfig": [
+        {
+          "property": "name",
+          "value": ""
+        },
+        {
+          "property": "icon",
+          "value": ""
+        }
+      ],
+      "entityidfilter": "input_boolean.dehumidifier_override",
+      "entityidfiltertype": "exact",
+      "outputinitially": false,
+      "state_type": "str",
+      "haltifstate": "",
+      "halt_if_type": "str",
+      "halt_if_compare": "is",
+      "outputs": 1,
+      "output_only_on_state_change": true,
+      "for": "0",
+      "forType": "num",
+      "forUnits": "minutes",
+      "ignorePrevStateNull": false,
+      "ignorePrevStateUnknown": false,
+      "ignorePrevStateUnavailable": false,
+      "ignoreCurrentStateUnknown": false,
+      "ignoreCurrentStateUnavailable": false,
+      "outputProperties": [
+        {
+          "property": "payload",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "entityState"
+        },
+        {
+          "property": "data",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "eventData"
+        },
+        {
+          "property": "topic",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "triggerId"
+        }
+      ],
+      "x": 120,
+      "y": 600,
+      "wires": [
+        [
+          "2f9d24ccbe096f3c"
+        ]
+      ]
+    },
+    {
+      "id": "2f9d24ccbe096f3c",
+      "type": "change",
+      "z": "a58c154f471cb0ca",
+      "name": "",
+      "rules": [
+        {
+          "t": "set",
+          "p": "dehumidifier_override",
+          "pt": "global",
+          "to": "payload",
+          "tot": "msg"
+        }
+      ],
+      "action": "",
+      "property": "",
+      "from": "",
+      "to": "",
+      "reg": false,
+      "x": 370,
+      "y": 600,
+      "wires": [
+        []
+      ]
+    },
+    {
+      "id": "42c6afc51d913cbd",
+      "type": "switch",
+      "z": "a58c154f471cb0ca",
+      "name": "Override",
+      "property": "dehumidifier_override",
+      "propertyType": "global",
+      "rules": [
+        {
+          "t": "eq",
+          "v": "off",
+          "vt": "str"
+        }
+      ],
+      "checkall": "true",
+      "repair": false,
+      "outputs": 1,
+      "x": 2100,
+      "y": 100,
+      "wires": [
+        [
+          "c4069e590dc2de24"
+        ]
+      ]
+    },
+    {
+      "id": "1d9f12da92cc2b96",
+      "type": "switch",
+      "z": "a58c154f471cb0ca",
+      "name": "Override",
+      "property": "dehumidifier_override",
+      "propertyType": "global",
+      "rules": [
+        {
+          "t": "eq",
+          "v": "off",
+          "vt": "str"
+        }
+      ],
+      "checkall": "true",
+      "repair": false,
+      "outputs": 1,
+      "x": 2100,
+      "y": 280,
+      "wires": [
+        [
+          "5949949fe9b30609"
+        ]
+      ]
+    },
+    {
+      "id": "a6d535ae1977508b",
+      "type": "server-state-changed",
+      "z": "a58c154f471cb0ca",
+      "name": "Average Humidity",
+      "server": "",
+      "version": 4,
+      "exposeToHomeAssistant": false,
+      "haConfig": [
+        {
+          "property": "name",
+          "value": ""
+        },
+        {
+          "property": "icon",
+          "value": ""
+        }
+      ],
+      "entityidfilter": "sensor.average_humidity_2",
+      "entityidfiltertype": "exact",
+      "outputinitially": false,
+      "state_type": "str",
+      "haltifstate": "",
+      "halt_if_type": "str",
+      "halt_if_compare": "is",
+      "outputs": 1,
+      "output_only_on_state_change": true,
+      "for": "0",
+      "forType": "num",
+      "forUnits": "minutes",
+      "ignorePrevStateNull": false,
+      "ignorePrevStateUnknown": false,
+      "ignorePrevStateUnavailable": false,
+      "ignoreCurrentStateUnknown": false,
+      "ignoreCurrentStateUnavailable": false,
+      "outputProperties": [
+        {
+          "property": "payload",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "entityState"
+        },
+        {
+          "property": "data",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "eventData"
+        },
+        {
+          "property": "topic",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "triggerId"
+        }
+      ],
+      "x": 300,
+      "y": 200,
+      "wires": [
+        [
+          "8c9cfc5735eeb2cc"
+        ]
+      ]
+    },
+    {
+      "id": "8e670822ee18694c",
+      "type": "switch",
+      "z": "a58c154f471cb0ca",
+      "name": "Too hot?",
+      "property": "avg_temperature",
+      "propertyType": "global",
+      "rules": [
+        {
+          "t": "lte",
+          "v": "maxTemp",
+          "vt": "env"
+        },
+        {
+          "t": "else"
+        }
+      ],
+      "checkall": "true",
+      "repair": false,
+      "outputs": 2,
+      "x": 1860,
+      "y": 140,
+      "wires": [
+        [
+          "42c6afc51d913cbd"
+        ],
+        [
+          "1d9f12da92cc2b96"
+        ]
+      ]
+    }
+  ]

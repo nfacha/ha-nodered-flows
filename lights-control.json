@@ -1,0 +1,1799 @@
+[
+    {
+      "id": "18832eab11e77a3a",
+      "type": "tab",
+      "label": "Lights Control",
+      "disabled": false,
+      "info": "",
+      "env": [
+        {
+          "name": "lightsTimeout",
+          "value": "10",
+          "type": "num"
+        },
+        {
+          "name": "lightsTimeoutHallway",
+          "value": "3",
+          "type": "num"
+        },
+        {
+          "name": "lightsTimeoutKitchen",
+          "value": "5",
+          "type": "num"
+        },
+        {
+          "name": "lightsTimeoutLivingRoom",
+          "value": "5",
+          "type": "num"
+        }
+      ]
+    },
+    {
+      "id": "755c20be206fb8bb",
+      "type": "inject",
+      "z": "18832eab11e77a3a",
+      "d": true,
+      "name": "Workday Morning Lights On",
+      "props": [
+        {
+          "p": "payload"
+        }
+      ],
+      "repeat": "",
+      "crontab": "00 08 * * 1,2,3,4,5",
+      "once": false,
+      "onceDelay": 0.1,
+      "topic": "",
+      "payload": "true",
+      "payloadType": "bool",
+      "x": 200,
+      "y": 40,
+      "wires": [
+        [
+          "6ad2122f0b3ef3b4"
+        ]
+      ]
+    },
+    {
+      "id": "06a85a49d81d6a7f",
+      "type": "inject",
+      "z": "18832eab11e77a3a",
+      "d": true,
+      "name": "Workday Morning Lights Off",
+      "props": [
+        {
+          "p": "payload"
+        }
+      ],
+      "repeat": "",
+      "crontab": "30 08 * * 1,2,3,4,5",
+      "once": false,
+      "onceDelay": 0.1,
+      "topic": "",
+      "payload": "false",
+      "payloadType": "bool",
+      "x": 200,
+      "y": 160,
+      "wires": [
+        [
+          "4632cee3be86394f"
+        ]
+      ]
+    },
+    {
+      "id": "37975624929f8c0e",
+      "type": "inject",
+      "z": "18832eab11e77a3a",
+      "name": "Everyday Night Lights On",
+      "props": [
+        {
+          "p": "payload"
+        }
+      ],
+      "repeat": "",
+      "crontab": "00 18 * * *",
+      "once": false,
+      "onceDelay": 0.1,
+      "topic": "",
+      "payload": "true",
+      "payloadType": "bool",
+      "x": 200,
+      "y": 100,
+      "wires": [
+        [
+          "6ad2122f0b3ef3b4"
+        ]
+      ]
+    },
+    {
+      "id": "2b12477d49d26cc1",
+      "type": "inject",
+      "z": "18832eab11e77a3a",
+      "d": true,
+      "name": "Everyday Night Lights Off",
+      "props": [
+        {
+          "p": "payload"
+        }
+      ],
+      "repeat": "",
+      "crontab": "59 23 * * *",
+      "once": false,
+      "onceDelay": 0.1,
+      "topic": "",
+      "payload": "false",
+      "payloadType": "bool",
+      "x": 200,
+      "y": 220,
+      "wires": [
+        [
+          "4632cee3be86394f"
+        ]
+      ]
+    },
+    {
+      "id": "6187c47497750344",
+      "type": "server-state-changed",
+      "z": "18832eab11e77a3a",
+      "name": "LivingRoom Motion On",
+      "server": "",
+      "version": 4,
+      "exposeToHomeAssistant": false,
+      "haConfig": [
+        {
+          "property": "name",
+          "value": ""
+        },
+        {
+          "property": "icon",
+          "value": ""
+        }
+      ],
+      "entityidfilter": "binary_sensor.living_room_motion_occupancy",
+      "entityidfiltertype": "exact",
+      "outputinitially": false,
+      "state_type": "str",
+      "haltifstate": "on",
+      "halt_if_type": "str",
+      "halt_if_compare": "is",
+      "outputs": 2,
+      "output_only_on_state_change": true,
+      "for": "0",
+      "forType": "num",
+      "forUnits": "minutes",
+      "ignorePrevStateNull": false,
+      "ignorePrevStateUnknown": false,
+      "ignorePrevStateUnavailable": false,
+      "ignoreCurrentStateUnknown": false,
+      "ignoreCurrentStateUnavailable": false,
+      "outputProperties": [
+        {
+          "property": "payload",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "entityState"
+        },
+        {
+          "property": "data",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "eventData"
+        },
+        {
+          "property": "topic",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "triggerId"
+        }
+      ],
+      "x": 160,
+      "y": 400,
+      "wires": [
+        [
+          "b45d0a28dd792687"
+        ],
+        []
+      ]
+    },
+    {
+      "id": "60ca622c4d3a0e27",
+      "type": "api-call-service",
+      "z": "18832eab11e77a3a",
+      "name": "Turn On",
+      "server": "",
+      "version": 5,
+      "debugenabled": false,
+      "domain": "homeassistant",
+      "service": "turn_on",
+      "areaId": [],
+      "deviceId": [
+        "f9c7c53bc630f34f61c1781b86bc681c",
+        "e6294e6b63c447de95cca2ec4a922388",
+        "12ddf6651951a507c50c10d481b279f3"
+      ],
+      "entityId": [],
+      "data": "",
+      "dataType": "jsonata",
+      "mergeContext": "",
+      "mustacheAltTags": false,
+      "outputProperties": [],
+      "queue": "none",
+      "x": 1000,
+      "y": 380,
+      "wires": [
+        []
+      ]
+    },
+    {
+      "id": "0beb7fd5b909cdb7",
+      "type": "server-state-changed",
+      "z": "18832eab11e77a3a",
+      "name": "Lights Override",
+      "server": "",
+      "version": 4,
+      "exposeToHomeAssistant": false,
+      "haConfig": [
+        {
+          "property": "name",
+          "value": ""
+        },
+        {
+          "property": "icon",
+          "value": ""
+        }
+      ],
+      "entityidfilter": "input_boolean.lights_override",
+      "entityidfiltertype": "exact",
+      "outputinitially": false,
+      "state_type": "str",
+      "haltifstate": "",
+      "halt_if_type": "str",
+      "halt_if_compare": "is",
+      "outputs": 1,
+      "output_only_on_state_change": true,
+      "for": "0",
+      "forType": "num",
+      "forUnits": "minutes",
+      "ignorePrevStateNull": false,
+      "ignorePrevStateUnknown": false,
+      "ignorePrevStateUnavailable": false,
+      "ignoreCurrentStateUnknown": false,
+      "ignoreCurrentStateUnavailable": false,
+      "outputProperties": [
+        {
+          "property": "payload",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "entityState"
+        },
+        {
+          "property": "data",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "eventData"
+        },
+        {
+          "property": "topic",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "triggerId"
+        }
+      ],
+      "x": 140,
+      "y": 280,
+      "wires": [
+        [
+          "d5320d3de1e96816"
+        ]
+      ]
+    },
+    {
+      "id": "41a9a8a628489725",
+      "type": "server-state-changed",
+      "z": "18832eab11e77a3a",
+      "name": "Lights Time",
+      "server": "",
+      "version": 4,
+      "exposeToHomeAssistant": false,
+      "haConfig": [
+        {
+          "property": "name",
+          "value": ""
+        },
+        {
+          "property": "icon",
+          "value": ""
+        }
+      ],
+      "entityidfilter": "input_boolean.lights_time",
+      "entityidfiltertype": "exact",
+      "outputinitially": false,
+      "state_type": "str",
+      "haltifstate": "",
+      "halt_if_type": "str",
+      "halt_if_compare": "is",
+      "outputs": 1,
+      "output_only_on_state_change": true,
+      "for": "0",
+      "forType": "num",
+      "forUnits": "minutes",
+      "ignorePrevStateNull": false,
+      "ignorePrevStateUnknown": false,
+      "ignorePrevStateUnavailable": false,
+      "ignoreCurrentStateUnknown": false,
+      "ignoreCurrentStateUnavailable": false,
+      "outputProperties": [
+        {
+          "property": "payload",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "entityState"
+        },
+        {
+          "property": "data",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "eventData"
+        },
+        {
+          "property": "topic",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "triggerId"
+        }
+      ],
+      "x": 130,
+      "y": 340,
+      "wires": [
+        [
+          "ed6b45314fa8fbd7"
+        ]
+      ]
+    },
+    {
+      "id": "ed6b45314fa8fbd7",
+      "type": "change",
+      "z": "18832eab11e77a3a",
+      "name": "",
+      "rules": [
+        {
+          "t": "set",
+          "p": "lights_time",
+          "pt": "global",
+          "to": "payload",
+          "tot": "msg"
+        }
+      ],
+      "action": "",
+      "property": "",
+      "from": "",
+      "to": "",
+      "reg": false,
+      "x": 380,
+      "y": 340,
+      "wires": [
+        []
+      ]
+    },
+    {
+      "id": "800235ac8f77ebc0",
+      "type": "switch",
+      "z": "18832eab11e77a3a",
+      "name": "",
+      "property": "bool",
+      "propertyType": "msg",
+      "rules": [
+        {
+          "t": "true"
+        }
+      ],
+      "checkall": "true",
+      "repair": false,
+      "outputs": 1,
+      "x": 850,
+      "y": 380,
+      "wires": [
+        [
+          "60ca622c4d3a0e27"
+        ]
+      ]
+    },
+    {
+      "id": "bb6cbae878144f3b",
+      "type": "and-gate",
+      "z": "18832eab11e77a3a",
+      "name": "",
+      "rules": [
+        {
+          "t": "eq",
+          "v": "off",
+          "vt": "str",
+          "propertyType": "global",
+          "property": "lights_override"
+        },
+        {
+          "t": "eq",
+          "v": "on",
+          "vt": "str",
+          "propertyType": "global",
+          "property": "lights_time"
+        }
+      ],
+      "outputTopic": "",
+      "gateType": "and",
+      "emitOnlyIfTrue": false,
+      "x": 700,
+      "y": 380,
+      "wires": [
+        [
+          "800235ac8f77ebc0"
+        ]
+      ]
+    },
+    {
+      "id": "6ad2122f0b3ef3b4",
+      "type": "api-call-service",
+      "z": "18832eab11e77a3a",
+      "name": "Turn On",
+      "server": "",
+      "version": 5,
+      "debugenabled": false,
+      "domain": "homeassistant",
+      "service": "turn_on",
+      "areaId": [],
+      "deviceId": [],
+      "entityId": [
+        "input_boolean.lights_time"
+      ],
+      "data": "",
+      "dataType": "jsonata",
+      "mergeContext": "",
+      "mustacheAltTags": false,
+      "outputProperties": [],
+      "queue": "none",
+      "x": 460,
+      "y": 80,
+      "wires": [
+        []
+      ]
+    },
+    {
+      "id": "4632cee3be86394f",
+      "type": "api-call-service",
+      "z": "18832eab11e77a3a",
+      "name": "Turn Off",
+      "server": "",
+      "version": 5,
+      "debugenabled": false,
+      "domain": "homeassistant",
+      "service": "turn_off",
+      "areaId": [],
+      "deviceId": [],
+      "entityId": [
+        "input_boolean.lights_time"
+      ],
+      "data": "",
+      "dataType": "jsonata",
+      "mergeContext": "",
+      "mustacheAltTags": false,
+      "outputProperties": [],
+      "queue": "none",
+      "x": 460,
+      "y": 200,
+      "wires": [
+        []
+      ]
+    },
+    {
+      "id": "d5320d3de1e96816",
+      "type": "change",
+      "z": "18832eab11e77a3a",
+      "name": "",
+      "rules": [
+        {
+          "t": "set",
+          "p": "lights_override",
+          "pt": "global",
+          "to": "payload",
+          "tot": "msg"
+        }
+      ],
+      "action": "",
+      "property": "",
+      "from": "",
+      "to": "",
+      "reg": false,
+      "x": 390,
+      "y": 280,
+      "wires": [
+        []
+      ]
+    },
+    {
+      "id": "0cc8251fda3c3adf",
+      "type": "server-state-changed",
+      "z": "18832eab11e77a3a",
+      "name": "LivingRoom Motion Off",
+      "server": "",
+      "version": 4,
+      "exposeToHomeAssistant": false,
+      "haConfig": [
+        {
+          "property": "name",
+          "value": ""
+        },
+        {
+          "property": "icon",
+          "value": ""
+        }
+      ],
+      "entityidfilter": "binary_sensor.living_room_motion_occupancy",
+      "entityidfiltertype": "exact",
+      "outputinitially": false,
+      "state_type": "str",
+      "haltifstate": "off",
+      "halt_if_type": "str",
+      "halt_if_compare": "is",
+      "outputs": 2,
+      "output_only_on_state_change": true,
+      "for": "$env('lightsTimeoutLivingRoom')\t",
+      "forType": "jsonata",
+      "forUnits": "minutes",
+      "ignorePrevStateNull": false,
+      "ignorePrevStateUnknown": false,
+      "ignorePrevStateUnavailable": false,
+      "ignoreCurrentStateUnknown": false,
+      "ignoreCurrentStateUnavailable": false,
+      "outputProperties": [
+        {
+          "property": "payload",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "entityState"
+        },
+        {
+          "property": "data",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "eventData"
+        },
+        {
+          "property": "topic",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "triggerId"
+        }
+      ],
+      "x": 160,
+      "y": 640,
+      "wires": [
+        [
+          "a016cca32eb4bd17"
+        ],
+        []
+      ]
+    },
+    {
+      "id": "efd4d30b39414224",
+      "type": "switch",
+      "z": "18832eab11e77a3a",
+      "name": "",
+      "property": "lights_override",
+      "propertyType": "global",
+      "rules": [
+        {
+          "t": "eq",
+          "v": "off",
+          "vt": "str"
+        }
+      ],
+      "checkall": "true",
+      "repair": false,
+      "outputs": 1,
+      "x": 990,
+      "y": 640,
+      "wires": [
+        [
+          "3c9f1e39991c8c09"
+        ]
+      ]
+    },
+    {
+      "id": "3c9f1e39991c8c09",
+      "type": "api-call-service",
+      "z": "18832eab11e77a3a",
+      "name": "Turn Off",
+      "server": "",
+      "version": 5,
+      "debugenabled": false,
+      "domain": "homeassistant",
+      "service": "turn_off",
+      "areaId": [],
+      "deviceId": [
+        "e6294e6b63c447de95cca2ec4a922388",
+        "12ddf6651951a507c50c10d481b279f3"
+      ],
+      "entityId": [],
+      "data": "",
+      "dataType": "jsonata",
+      "mergeContext": "",
+      "mustacheAltTags": false,
+      "outputProperties": [],
+      "queue": "none",
+      "x": 1140,
+      "y": 640,
+      "wires": [
+        []
+      ]
+    },
+    {
+      "id": "24e0baef5d3d24a4",
+      "type": "server-state-changed",
+      "z": "18832eab11e77a3a",
+      "name": "Kitchen Motion On",
+      "server": "",
+      "version": 4,
+      "exposeToHomeAssistant": false,
+      "haConfig": [
+        {
+          "property": "name",
+          "value": ""
+        },
+        {
+          "property": "icon",
+          "value": ""
+        }
+      ],
+      "entityidfilter": "binary_sensor.kitchen_motion_occupancy",
+      "entityidfiltertype": "exact",
+      "outputinitially": false,
+      "state_type": "str",
+      "haltifstate": "on",
+      "halt_if_type": "str",
+      "halt_if_compare": "is",
+      "outputs": 2,
+      "output_only_on_state_change": true,
+      "for": "0",
+      "forType": "num",
+      "forUnits": "minutes",
+      "ignorePrevStateNull": false,
+      "ignorePrevStateUnknown": false,
+      "ignorePrevStateUnavailable": false,
+      "ignoreCurrentStateUnknown": false,
+      "ignoreCurrentStateUnavailable": false,
+      "outputProperties": [
+        {
+          "property": "payload",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "entityState"
+        },
+        {
+          "property": "data",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "eventData"
+        },
+        {
+          "property": "topic",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "triggerId"
+        }
+      ],
+      "x": 150,
+      "y": 780,
+      "wires": [
+        [
+          "a39b3cc4954f822c"
+        ],
+        []
+      ]
+    },
+    {
+      "id": "08de33ed7e2572e6",
+      "type": "api-call-service",
+      "z": "18832eab11e77a3a",
+      "name": "Turn On",
+      "server": "",
+      "version": 5,
+      "debugenabled": false,
+      "domain": "homeassistant",
+      "service": "turn_on",
+      "areaId": [],
+      "deviceId": [
+        "c2adaa3ff434313eb170f62bb9b4c05f"
+      ],
+      "entityId": [],
+      "data": "",
+      "dataType": "jsonata",
+      "mergeContext": "",
+      "mustacheAltTags": false,
+      "outputProperties": [],
+      "queue": "none",
+      "x": 660,
+      "y": 780,
+      "wires": [
+        []
+      ]
+    },
+    {
+      "id": "9d1e0c0f88496b9a",
+      "type": "switch",
+      "z": "18832eab11e77a3a",
+      "name": "",
+      "property": "bool",
+      "propertyType": "msg",
+      "rules": [
+        {
+          "t": "true"
+        }
+      ],
+      "checkall": "true",
+      "repair": false,
+      "outputs": 1,
+      "x": 510,
+      "y": 780,
+      "wires": [
+        [
+          "08de33ed7e2572e6"
+        ]
+      ]
+    },
+    {
+      "id": "a39b3cc4954f822c",
+      "type": "and-gate",
+      "z": "18832eab11e77a3a",
+      "name": "",
+      "rules": [
+        {
+          "t": "eq",
+          "v": "off",
+          "vt": "str",
+          "propertyType": "global",
+          "property": "lights_override"
+        },
+        {
+          "t": "eq",
+          "v": "on",
+          "vt": "str",
+          "propertyType": "global",
+          "property": "lights_time"
+        }
+      ],
+      "outputTopic": "",
+      "gateType": "and",
+      "emitOnlyIfTrue": false,
+      "x": 360,
+      "y": 780,
+      "wires": [
+        [
+          "9d1e0c0f88496b9a"
+        ]
+      ]
+    },
+    {
+      "id": "a88a7b25c5831dd2",
+      "type": "server-state-changed",
+      "z": "18832eab11e77a3a",
+      "name": "Kitchen Motion Off",
+      "server": "",
+      "version": 4,
+      "exposeToHomeAssistant": false,
+      "haConfig": [
+        {
+          "property": "name",
+          "value": ""
+        },
+        {
+          "property": "icon",
+          "value": ""
+        }
+      ],
+      "entityidfilter": "binary_sensor.kitchen_motion_occupancy",
+      "entityidfiltertype": "exact",
+      "outputinitially": false,
+      "state_type": "str",
+      "haltifstate": "off",
+      "halt_if_type": "str",
+      "halt_if_compare": "is",
+      "outputs": 2,
+      "output_only_on_state_change": true,
+      "for": "$env('lightsTimeoutKitchen')\t",
+      "forType": "jsonata",
+      "forUnits": "minutes",
+      "ignorePrevStateNull": false,
+      "ignorePrevStateUnknown": false,
+      "ignorePrevStateUnavailable": false,
+      "ignoreCurrentStateUnknown": false,
+      "ignoreCurrentStateUnavailable": false,
+      "outputProperties": [
+        {
+          "property": "payload",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "entityState"
+        },
+        {
+          "property": "data",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "eventData"
+        },
+        {
+          "property": "topic",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "triggerId"
+        }
+      ],
+      "x": 150,
+      "y": 840,
+      "wires": [
+        [
+          "3f969078911b7a90"
+        ],
+        []
+      ]
+    },
+    {
+      "id": "3f969078911b7a90",
+      "type": "switch",
+      "z": "18832eab11e77a3a",
+      "name": "",
+      "property": "lights_override",
+      "propertyType": "global",
+      "rules": [
+        {
+          "t": "eq",
+          "v": "off",
+          "vt": "str"
+        }
+      ],
+      "checkall": "true",
+      "repair": false,
+      "outputs": 1,
+      "x": 350,
+      "y": 840,
+      "wires": [
+        [
+          "653fb1ca20720e91"
+        ]
+      ]
+    },
+    {
+      "id": "653fb1ca20720e91",
+      "type": "api-call-service",
+      "z": "18832eab11e77a3a",
+      "name": "Turn Off",
+      "server": "",
+      "version": 5,
+      "debugenabled": false,
+      "domain": "homeassistant",
+      "service": "turn_off",
+      "areaId": [],
+      "deviceId": [
+        "c2adaa3ff434313eb170f62bb9b4c05f"
+      ],
+      "entityId": [],
+      "data": "",
+      "dataType": "jsonata",
+      "mergeContext": "",
+      "mustacheAltTags": false,
+      "outputProperties": [],
+      "queue": "none",
+      "x": 500,
+      "y": 840,
+      "wires": [
+        []
+      ]
+    },
+    {
+      "id": "e4ac2d32d3f76baa",
+      "type": "server-state-changed",
+      "z": "18832eab11e77a3a",
+      "name": "Bedroom Motion On",
+      "server": "",
+      "version": 4,
+      "exposeToHomeAssistant": false,
+      "haConfig": [
+        {
+          "property": "name",
+          "value": ""
+        },
+        {
+          "property": "icon",
+          "value": ""
+        }
+      ],
+      "entityidfilter": "binary_sensor.bedroom_motion_occupancy",
+      "entityidfiltertype": "exact",
+      "outputinitially": false,
+      "state_type": "str",
+      "haltifstate": "on",
+      "halt_if_type": "str",
+      "halt_if_compare": "is",
+      "outputs": 2,
+      "output_only_on_state_change": true,
+      "for": "0",
+      "forType": "num",
+      "forUnits": "minutes",
+      "ignorePrevStateNull": false,
+      "ignorePrevStateUnknown": false,
+      "ignorePrevStateUnavailable": false,
+      "ignoreCurrentStateUnknown": false,
+      "ignoreCurrentStateUnavailable": false,
+      "outputProperties": [
+        {
+          "property": "payload",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "entityState"
+        },
+        {
+          "property": "data",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "eventData"
+        },
+        {
+          "property": "topic",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "triggerId"
+        }
+      ],
+      "x": 150,
+      "y": 920,
+      "wires": [
+        [
+          "b54c9af730d17fe7"
+        ],
+        []
+      ]
+    },
+    {
+      "id": "96360431f82f4706",
+      "type": "api-call-service",
+      "z": "18832eab11e77a3a",
+      "name": "Turn On",
+      "server": "",
+      "version": 5,
+      "debugenabled": false,
+      "domain": "homeassistant",
+      "service": "turn_on",
+      "areaId": [],
+      "deviceId": [
+        "08c47eafac269e848916106743441661"
+      ],
+      "entityId": [],
+      "data": "",
+      "dataType": "jsonata",
+      "mergeContext": "",
+      "mustacheAltTags": false,
+      "outputProperties": [],
+      "queue": "none",
+      "x": 660,
+      "y": 920,
+      "wires": [
+        []
+      ]
+    },
+    {
+      "id": "ced88c8e81536e99",
+      "type": "switch",
+      "z": "18832eab11e77a3a",
+      "name": "",
+      "property": "bool",
+      "propertyType": "msg",
+      "rules": [
+        {
+          "t": "true"
+        }
+      ],
+      "checkall": "true",
+      "repair": false,
+      "outputs": 1,
+      "x": 510,
+      "y": 920,
+      "wires": [
+        [
+          "96360431f82f4706"
+        ]
+      ]
+    },
+    {
+      "id": "b54c9af730d17fe7",
+      "type": "and-gate",
+      "z": "18832eab11e77a3a",
+      "name": "",
+      "rules": [
+        {
+          "t": "eq",
+          "v": "off",
+          "vt": "str",
+          "propertyType": "global",
+          "property": "lights_override"
+        },
+        {
+          "t": "eq",
+          "v": "on",
+          "vt": "str",
+          "propertyType": "global",
+          "property": "lights_time"
+        }
+      ],
+      "outputTopic": "",
+      "gateType": "and",
+      "emitOnlyIfTrue": false,
+      "x": 360,
+      "y": 920,
+      "wires": [
+        [
+          "ced88c8e81536e99"
+        ]
+      ]
+    },
+    {
+      "id": "065f0025ef627074",
+      "type": "server-state-changed",
+      "z": "18832eab11e77a3a",
+      "name": "Bedroom Motion Off",
+      "server": "",
+      "version": 4,
+      "exposeToHomeAssistant": false,
+      "haConfig": [
+        {
+          "property": "name",
+          "value": ""
+        },
+        {
+          "property": "icon",
+          "value": ""
+        }
+      ],
+      "entityidfilter": "binary_sensor.bedroom_motion_occupancy",
+      "entityidfiltertype": "exact",
+      "outputinitially": false,
+      "state_type": "str",
+      "haltifstate": "off",
+      "halt_if_type": "str",
+      "halt_if_compare": "is",
+      "outputs": 2,
+      "output_only_on_state_change": true,
+      "for": "$env('lightsTimeout')\t",
+      "forType": "jsonata",
+      "forUnits": "minutes",
+      "ignorePrevStateNull": false,
+      "ignorePrevStateUnknown": false,
+      "ignorePrevStateUnavailable": false,
+      "ignoreCurrentStateUnknown": false,
+      "ignoreCurrentStateUnavailable": false,
+      "outputProperties": [
+        {
+          "property": "payload",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "entityState"
+        },
+        {
+          "property": "data",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "eventData"
+        },
+        {
+          "property": "topic",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "triggerId"
+        }
+      ],
+      "x": 150,
+      "y": 980,
+      "wires": [
+        [
+          "a8930f9f47a83490"
+        ],
+        []
+      ]
+    },
+    {
+      "id": "a8930f9f47a83490",
+      "type": "switch",
+      "z": "18832eab11e77a3a",
+      "name": "",
+      "property": "lights_override",
+      "propertyType": "global",
+      "rules": [
+        {
+          "t": "eq",
+          "v": "off",
+          "vt": "str"
+        }
+      ],
+      "checkall": "true",
+      "repair": false,
+      "outputs": 1,
+      "x": 350,
+      "y": 980,
+      "wires": [
+        [
+          "2947597bcbc5fcc2"
+        ]
+      ]
+    },
+    {
+      "id": "2947597bcbc5fcc2",
+      "type": "api-call-service",
+      "z": "18832eab11e77a3a",
+      "name": "Turn Off",
+      "server": "",
+      "version": 5,
+      "debugenabled": false,
+      "domain": "homeassistant",
+      "service": "turn_off",
+      "areaId": [],
+      "deviceId": [
+        "08c47eafac269e848916106743441661"
+      ],
+      "entityId": [],
+      "data": "",
+      "dataType": "jsonata",
+      "mergeContext": "",
+      "mustacheAltTags": false,
+      "outputProperties": [],
+      "queue": "none",
+      "x": 500,
+      "y": 980,
+      "wires": [
+        []
+      ]
+    },
+    {
+      "id": "31df6d7291f573fd",
+      "type": "server-state-changed",
+      "z": "18832eab11e77a3a",
+      "name": "Hallway Motion On",
+      "server": "",
+      "version": 4,
+      "exposeToHomeAssistant": false,
+      "haConfig": [
+        {
+          "property": "name",
+          "value": ""
+        },
+        {
+          "property": "icon",
+          "value": ""
+        }
+      ],
+      "entityidfilter": "binary_sensor.hallway_motion_occupancy",
+      "entityidfiltertype": "exact",
+      "outputinitially": false,
+      "state_type": "str",
+      "haltifstate": "on",
+      "halt_if_type": "str",
+      "halt_if_compare": "is",
+      "outputs": 2,
+      "output_only_on_state_change": true,
+      "for": "0",
+      "forType": "num",
+      "forUnits": "minutes",
+      "ignorePrevStateNull": false,
+      "ignorePrevStateUnknown": false,
+      "ignorePrevStateUnavailable": false,
+      "ignoreCurrentStateUnknown": false,
+      "ignoreCurrentStateUnavailable": false,
+      "outputProperties": [
+        {
+          "property": "payload",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "entityState"
+        },
+        {
+          "property": "data",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "eventData"
+        },
+        {
+          "property": "topic",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "triggerId"
+        }
+      ],
+      "x": 150,
+      "y": 1040,
+      "wires": [
+        [
+          "1d980eff6d62104a"
+        ],
+        []
+      ]
+    },
+    {
+      "id": "272d9d9115f14cde",
+      "type": "api-call-service",
+      "z": "18832eab11e77a3a",
+      "name": "Turn On",
+      "server": "",
+      "version": 5,
+      "debugenabled": false,
+      "domain": "homeassistant",
+      "service": "turn_on",
+      "areaId": [],
+      "deviceId": [
+        "c9dae52c54f703d9f0d468c2eb78236f"
+      ],
+      "entityId": [],
+      "data": "",
+      "dataType": "jsonata",
+      "mergeContext": "",
+      "mustacheAltTags": false,
+      "outputProperties": [],
+      "queue": "none",
+      "x": 660,
+      "y": 1100,
+      "wires": [
+        []
+      ]
+    },
+    {
+      "id": "d9e96385a774512b",
+      "type": "switch",
+      "z": "18832eab11e77a3a",
+      "name": "",
+      "property": "bool",
+      "propertyType": "msg",
+      "rules": [
+        {
+          "t": "true"
+        }
+      ],
+      "checkall": "true",
+      "repair": false,
+      "outputs": 1,
+      "x": 510,
+      "y": 1100,
+      "wires": [
+        [
+          "272d9d9115f14cde"
+        ]
+      ]
+    },
+    {
+      "id": "1d980eff6d62104a",
+      "type": "and-gate",
+      "z": "18832eab11e77a3a",
+      "name": "",
+      "rules": [
+        {
+          "t": "eq",
+          "v": "off",
+          "vt": "str",
+          "propertyType": "global",
+          "property": "lights_override"
+        },
+        {
+          "t": "eq",
+          "v": "on",
+          "vt": "str",
+          "propertyType": "global",
+          "property": "lights_time"
+        }
+      ],
+      "outputTopic": "",
+      "gateType": "and",
+      "emitOnlyIfTrue": false,
+      "x": 360,
+      "y": 1100,
+      "wires": [
+        [
+          "d9e96385a774512b"
+        ]
+      ]
+    },
+    {
+      "id": "faeebe3ca371f492",
+      "type": "server-state-changed",
+      "z": "18832eab11e77a3a",
+      "name": "Hallway Motion Off",
+      "server": "",
+      "version": 4,
+      "exposeToHomeAssistant": false,
+      "haConfig": [
+        {
+          "property": "name",
+          "value": ""
+        },
+        {
+          "property": "icon",
+          "value": ""
+        }
+      ],
+      "entityidfilter": "binary_sensor.hallway_motion_occupancy",
+      "entityidfiltertype": "exact",
+      "outputinitially": false,
+      "state_type": "str",
+      "haltifstate": "off",
+      "halt_if_type": "str",
+      "halt_if_compare": "is",
+      "outputs": 2,
+      "output_only_on_state_change": true,
+      "for": "$env('lightsTimeoutHallway')\t",
+      "forType": "jsonata",
+      "forUnits": "minutes",
+      "ignorePrevStateNull": false,
+      "ignorePrevStateUnknown": false,
+      "ignorePrevStateUnavailable": false,
+      "ignoreCurrentStateUnknown": false,
+      "ignoreCurrentStateUnavailable": false,
+      "outputProperties": [
+        {
+          "property": "payload",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "entityState"
+        },
+        {
+          "property": "data",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "eventData"
+        },
+        {
+          "property": "topic",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "triggerId"
+        }
+      ],
+      "x": 150,
+      "y": 1180,
+      "wires": [
+        [
+          "cb45075ea03dc973"
+        ],
+        []
+      ]
+    },
+    {
+      "id": "cb45075ea03dc973",
+      "type": "switch",
+      "z": "18832eab11e77a3a",
+      "name": "",
+      "property": "lights_override",
+      "propertyType": "global",
+      "rules": [
+        {
+          "t": "eq",
+          "v": "off",
+          "vt": "str"
+        }
+      ],
+      "checkall": "true",
+      "repair": false,
+      "outputs": 1,
+      "x": 350,
+      "y": 1180,
+      "wires": [
+        [
+          "b13b60cb73ae60cf"
+        ]
+      ]
+    },
+    {
+      "id": "b13b60cb73ae60cf",
+      "type": "api-call-service",
+      "z": "18832eab11e77a3a",
+      "name": "Turn Off",
+      "server": "",
+      "version": 5,
+      "debugenabled": false,
+      "domain": "homeassistant",
+      "service": "turn_off",
+      "areaId": [],
+      "deviceId": [
+        "c9dae52c54f703d9f0d468c2eb78236f"
+      ],
+      "entityId": [],
+      "data": "",
+      "dataType": "jsonata",
+      "mergeContext": "",
+      "mustacheAltTags": false,
+      "outputProperties": [],
+      "queue": "none",
+      "x": 500,
+      "y": 1180,
+      "wires": [
+        []
+      ]
+    },
+    {
+      "id": "67043dabdfa3b3a6",
+      "type": "server-state-changed",
+      "z": "18832eab11e77a3a",
+      "name": "Main Door Open",
+      "server": "",
+      "version": 4,
+      "exposeToHomeAssistant": false,
+      "haConfig": [
+        {
+          "property": "name",
+          "value": ""
+        },
+        {
+          "property": "icon",
+          "value": ""
+        }
+      ],
+      "entityidfilter": "binary_sensor.main_door_contact",
+      "entityidfiltertype": "exact",
+      "outputinitially": false,
+      "state_type": "str",
+      "haltifstate": "on",
+      "halt_if_type": "str",
+      "halt_if_compare": "is",
+      "outputs": 2,
+      "output_only_on_state_change": true,
+      "for": "0",
+      "forType": "num",
+      "forUnits": "minutes",
+      "ignorePrevStateNull": false,
+      "ignorePrevStateUnknown": false,
+      "ignorePrevStateUnavailable": false,
+      "ignoreCurrentStateUnknown": false,
+      "ignoreCurrentStateUnavailable": false,
+      "outputProperties": [
+        {
+          "property": "payload",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "entityState"
+        },
+        {
+          "property": "data",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "eventData"
+        },
+        {
+          "property": "topic",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "triggerId"
+        }
+      ],
+      "x": 140,
+      "y": 1100,
+      "wires": [
+        [
+          "1d980eff6d62104a"
+        ],
+        []
+      ]
+    },
+    {
+      "id": "174ad46f53c02f8b",
+      "type": "server-state-changed",
+      "z": "18832eab11e77a3a",
+      "name": "LivingRoom Table On",
+      "server": "",
+      "version": 4,
+      "exposeToHomeAssistant": false,
+      "haConfig": [
+        {
+          "property": "name",
+          "value": ""
+        },
+        {
+          "property": "icon",
+          "value": ""
+        }
+      ],
+      "entityidfilter": "binary_sensor.living_room_table_motion_occupancy",
+      "entityidfiltertype": "exact",
+      "outputinitially": false,
+      "state_type": "str",
+      "haltifstate": "on",
+      "halt_if_type": "str",
+      "halt_if_compare": "is",
+      "outputs": 2,
+      "output_only_on_state_change": true,
+      "for": "0",
+      "forType": "num",
+      "forUnits": "minutes",
+      "ignorePrevStateNull": false,
+      "ignorePrevStateUnknown": false,
+      "ignorePrevStateUnavailable": false,
+      "ignoreCurrentStateUnknown": false,
+      "ignoreCurrentStateUnavailable": false,
+      "outputProperties": [
+        {
+          "property": "payload",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "entityState"
+        },
+        {
+          "property": "data",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "eventData"
+        },
+        {
+          "property": "topic",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "triggerId"
+        }
+      ],
+      "x": 160,
+      "y": 460,
+      "wires": [
+        [
+          "f35a7636071816aa"
+        ],
+        []
+      ]
+    },
+    {
+      "id": "09e53693bf66d2e0",
+      "type": "server-state-changed",
+      "z": "18832eab11e77a3a",
+      "name": "LivingRoom Table Off",
+      "server": "",
+      "version": 4,
+      "exposeToHomeAssistant": false,
+      "haConfig": [
+        {
+          "property": "name",
+          "value": ""
+        },
+        {
+          "property": "icon",
+          "value": ""
+        }
+      ],
+      "entityidfilter": "binary_sensor.living_room_table_motion_occupancy",
+      "entityidfiltertype": "exact",
+      "outputinitially": false,
+      "state_type": "str",
+      "haltifstate": "off",
+      "halt_if_type": "str",
+      "halt_if_compare": "is",
+      "outputs": 2,
+      "output_only_on_state_change": true,
+      "for": "$env('lightsTimeoutLivingRoom')\t",
+      "forType": "jsonata",
+      "forUnits": "minutes",
+      "ignorePrevStateNull": false,
+      "ignorePrevStateUnknown": false,
+      "ignorePrevStateUnavailable": false,
+      "ignoreCurrentStateUnknown": false,
+      "ignoreCurrentStateUnavailable": false,
+      "outputProperties": [
+        {
+          "property": "payload",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "entityState"
+        },
+        {
+          "property": "data",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "eventData"
+        },
+        {
+          "property": "topic",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "triggerId"
+        }
+      ],
+      "x": 160,
+      "y": 700,
+      "wires": [
+        [
+          "1db9b82ce0322eeb"
+        ],
+        []
+      ]
+    },
+    {
+      "id": "a016cca32eb4bd17",
+      "type": "change",
+      "z": "18832eab11e77a3a",
+      "name": "",
+      "rules": [
+        {
+          "t": "set",
+          "p": "living_room_motion",
+          "pt": "global",
+          "to": "payload",
+          "tot": "msg"
+        }
+      ],
+      "action": "",
+      "property": "",
+      "from": "",
+      "to": "",
+      "reg": false,
+      "x": 410,
+      "y": 620,
+      "wires": [
+        [
+          "d53c43dec70c8515"
+        ]
+      ]
+    },
+    {
+      "id": "1db9b82ce0322eeb",
+      "type": "change",
+      "z": "18832eab11e77a3a",
+      "name": "",
+      "rules": [
+        {
+          "t": "set",
+          "p": "living_room_table_motion",
+          "pt": "global",
+          "to": "payload",
+          "tot": "msg"
+        }
+      ],
+      "action": "",
+      "property": "",
+      "from": "",
+      "to": "",
+      "reg": false,
+      "x": 430,
+      "y": 680,
+      "wires": [
+        [
+          "d53c43dec70c8515"
+        ]
+      ]
+    },
+    {
+      "id": "d53c43dec70c8515",
+      "type": "and-gate",
+      "z": "18832eab11e77a3a",
+      "name": "",
+      "rules": [
+        {
+          "t": "eq",
+          "v": "off",
+          "vt": "str",
+          "propertyType": "global",
+          "property": "living_room_table_motion"
+        },
+        {
+          "t": "eq",
+          "v": "off",
+          "vt": "str",
+          "propertyType": "global",
+          "property": "living_room_motion"
+        }
+      ],
+      "outputTopic": "",
+      "gateType": "and",
+      "emitOnlyIfTrue": false,
+      "x": 680,
+      "y": 640,
+      "wires": [
+        [
+          "94cb14b0d64f1fe3"
+        ]
+      ]
+    },
+    {
+      "id": "b45d0a28dd792687",
+      "type": "change",
+      "z": "18832eab11e77a3a",
+      "name": "",
+      "rules": [
+        {
+          "t": "set",
+          "p": "living_room_motion",
+          "pt": "global",
+          "to": "payload",
+          "tot": "msg"
+        }
+      ],
+      "action": "",
+      "property": "",
+      "from": "",
+      "to": "",
+      "reg": false,
+      "x": 410,
+      "y": 380,
+      "wires": [
+        [
+          "bb6cbae878144f3b"
+        ]
+      ]
+    },
+    {
+      "id": "f35a7636071816aa",
+      "type": "change",
+      "z": "18832eab11e77a3a",
+      "name": "",
+      "rules": [
+        {
+          "t": "set",
+          "p": "living_room_table_motion",
+          "pt": "global",
+          "to": "payload",
+          "tot": "msg"
+        }
+      ],
+      "action": "",
+      "property": "",
+      "from": "",
+      "to": "",
+      "reg": false,
+      "x": 430,
+      "y": 440,
+      "wires": [
+        [
+          "bb6cbae878144f3b",
+          "69827289f04270db"
+        ]
+      ]
+    },
+    {
+      "id": "94cb14b0d64f1fe3",
+      "type": "switch",
+      "z": "18832eab11e77a3a",
+      "name": "",
+      "property": "bool",
+      "propertyType": "msg",
+      "rules": [
+        {
+          "t": "true"
+        }
+      ],
+      "checkall": "true",
+      "repair": false,
+      "outputs": 1,
+      "x": 830,
+      "y": 640,
+      "wires": [
+        [
+          "efd4d30b39414224"
+        ]
+      ]
+    },
+    {
+      "id": "69827289f04270db",
+      "type": "api-call-service",
+      "z": "18832eab11e77a3a",
+      "name": "Turn On Table",
+      "server": "",
+      "version": 5,
+      "debugenabled": false,
+      "domain": "homeassistant",
+      "service": "turn_on",
+      "areaId": [],
+      "deviceId": [
+        "f9c7c53bc630f34f61c1781b86bc681c",
+        "e6294e6b63c447de95cca2ec4a922388"
+      ],
+      "entityId": [],
+      "data": "",
+      "dataType": "jsonata",
+      "mergeContext": "",
+      "mustacheAltTags": false,
+      "outputProperties": [],
+      "queue": "none",
+      "x": 740,
+      "y": 480,
+      "wires": [
+        []
+      ]
+    }
+  ]

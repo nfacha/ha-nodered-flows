@@ -1,0 +1,1383 @@
+[
+    {
+      "id": "698fb647977d2c05",
+      "type": "tab",
+      "label": "Washing Machine",
+      "disabled": false,
+      "info": "",
+      "env": []
+    },
+    {
+      "id": "0404d9a9e55b6bdd",
+      "type": "inject",
+      "z": "698fb647977d2c05",
+      "name": "Morning Trigger (Weekdays)",
+      "props": [
+        {
+          "p": "payload"
+        },
+        {
+          "p": "topic",
+          "vt": "str"
+        }
+      ],
+      "repeat": "",
+      "crontab": "00 10 * * 1,2,3,4,5",
+      "once": false,
+      "onceDelay": 0.1,
+      "topic": "",
+      "payload": "",
+      "payloadType": "date",
+      "x": 170,
+      "y": 20,
+      "wires": [
+        [
+          "e0a65010a009fbf3"
+        ]
+      ]
+    },
+    {
+      "id": "e0a65010a009fbf3",
+      "type": "api-current-state",
+      "z": "698fb647977d2c05",
+      "name": "Weather Forecast",
+      "server": "",
+      "version": 3,
+      "outputs": 1,
+      "halt_if": "",
+      "halt_if_type": "str",
+      "halt_if_compare": "is",
+      "entity_id": "weather.daily_weather",
+      "state_type": "str",
+      "blockInputOverrides": false,
+      "outputProperties": [
+        {
+          "property": "payload",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "entityState"
+        },
+        {
+          "property": "data",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "entity"
+        }
+      ],
+      "for": "0",
+      "forType": "num",
+      "forUnits": "minutes",
+      "override_topic": false,
+      "state_location": "payload",
+      "override_payload": "msg",
+      "entity_location": "data",
+      "override_data": "msg",
+      "x": 450,
+      "y": 80,
+      "wires": [
+        [
+          "3e02443520e6d20c"
+        ]
+      ]
+    },
+    {
+      "id": "3e02443520e6d20c",
+      "type": "switch",
+      "z": "698fb647977d2c05",
+      "name": "Will Rain?",
+      "property": "data.attributes.forecast[0].condition",
+      "propertyType": "msg",
+      "rules": [
+        {
+          "t": "cont",
+          "v": "rain",
+          "vt": "str"
+        },
+        {
+          "t": "else"
+        }
+      ],
+      "checkall": "false",
+      "repair": false,
+      "outputs": 2,
+      "x": 660,
+      "y": 80,
+      "wires": [
+        [
+          "711bc71a4725dd5f"
+        ],
+        [
+          "119f73cae149fc18",
+          "2c95aaa03d25bdc0"
+        ]
+      ]
+    },
+    {
+      "id": "711bc71a4725dd5f",
+      "type": "api-call-service",
+      "z": "698fb647977d2c05",
+      "d": true,
+      "name": "NotifyBadWeather",
+      "server": "",
+      "version": 5,
+      "debugenabled": false,
+      "domain": "telegram_bot",
+      "service": "send_message",
+      "areaId": [],
+      "deviceId": [],
+      "entityId": [],
+      "data": "{\t   \"message\":\"Washing machine will not be enabled due to weather\",\t   \"target\":\"105727644\"\t}",
+      "dataType": "jsonata",
+      "mergeContext": "",
+      "mustacheAltTags": false,
+      "outputProperties": [],
+      "queue": "none",
+      "x": 910,
+      "y": 40,
+      "wires": [
+        []
+      ]
+    },
+    {
+      "id": "21b91f994692b3c6",
+      "type": "switch",
+      "z": "698fb647977d2c05",
+      "name": "Is Armed",
+      "property": "payload",
+      "propertyType": "msg",
+      "rules": [
+        {
+          "t": "eq",
+          "v": "on",
+          "vt": "str"
+        },
+        {
+          "t": "else"
+        }
+      ],
+      "checkall": "false",
+      "repair": false,
+      "outputs": 2,
+      "x": 920,
+      "y": 180,
+      "wires": [
+        [
+          "210e1d52b1058fb0"
+        ],
+        [
+          "349248f22235ecd0"
+        ]
+      ]
+    },
+    {
+      "id": "119f73cae149fc18",
+      "type": "api-call-service",
+      "z": "698fb647977d2c05",
+      "d": true,
+      "name": "NotifyGoodWeather",
+      "server": "",
+      "version": 5,
+      "debugenabled": false,
+      "domain": "telegram_bot",
+      "service": "send_message",
+      "areaId": [],
+      "deviceId": [],
+      "entityId": [],
+      "data": "{\t   \"message\":\"Washing machine has good weather to activate\",\t   \"target\":\"105727644\"\t}",
+      "dataType": "jsonata",
+      "mergeContext": "",
+      "mustacheAltTags": false,
+      "outputProperties": [],
+      "queue": "none",
+      "x": 910,
+      "y": 100,
+      "wires": [
+        []
+      ]
+    },
+    {
+      "id": "2c95aaa03d25bdc0",
+      "type": "api-current-state",
+      "z": "698fb647977d2c05",
+      "name": "Arm State",
+      "server": "",
+      "version": 3,
+      "outputs": 1,
+      "halt_if": "",
+      "halt_if_type": "str",
+      "halt_if_compare": "is",
+      "entity_id": "input_boolean.washing_machine_arm",
+      "state_type": "str",
+      "blockInputOverrides": false,
+      "outputProperties": [
+        {
+          "property": "payload",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "entityState"
+        },
+        {
+          "property": "data",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "entity"
+        }
+      ],
+      "for": "0",
+      "forType": "num",
+      "forUnits": "minutes",
+      "override_topic": false,
+      "state_location": "payload",
+      "override_payload": "msg",
+      "entity_location": "data",
+      "override_data": "msg",
+      "x": 780,
+      "y": 180,
+      "wires": [
+        [
+          "21b91f994692b3c6",
+          "72ab6c8537b0a7d1"
+        ]
+      ]
+    },
+    {
+      "id": "349248f22235ecd0",
+      "type": "api-call-service",
+      "z": "698fb647977d2c05",
+      "name": "NotifyGoodWeatherUnArmed",
+      "server": "",
+      "version": 5,
+      "debugenabled": false,
+      "domain": "telegram_bot",
+      "service": "send_message",
+      "areaId": [],
+      "deviceId": [],
+      "entityId": [],
+      "data": "{\t   \"message\":\"👕 É esperado bom tempo, no entanto a maquina de lavar não está preparada\",\t   \"target\":\"-1001686169275\"\t}",
+      "dataType": "jsonata",
+      "mergeContext": "",
+      "mustacheAltTags": false,
+      "outputProperties": [],
+      "queue": "none",
+      "x": 1140,
+      "y": 200,
+      "wires": [
+        []
+      ]
+    },
+    {
+      "id": "210e1d52b1058fb0",
+      "type": "api-call-service",
+      "z": "698fb647977d2c05",
+      "name": "DisarmMachine",
+      "server": "",
+      "version": 5,
+      "debugenabled": false,
+      "domain": "input_boolean",
+      "service": "turn_off",
+      "areaId": [],
+      "deviceId": [],
+      "entityId": [
+        "input_boolean.washing_machine_arm"
+      ],
+      "data": "",
+      "dataType": "jsonata",
+      "mergeContext": "",
+      "mustacheAltTags": false,
+      "outputProperties": [],
+      "queue": "none",
+      "x": 1160,
+      "y": 140,
+      "wires": [
+        [
+          "a71b31fea6bba5ec",
+          "fd19f47c8c885dcd"
+        ]
+      ]
+    },
+    {
+      "id": "a71b31fea6bba5ec",
+      "type": "api-call-service",
+      "z": "698fb647977d2c05",
+      "name": "TurnOnMachine",
+      "server": "",
+      "version": 5,
+      "debugenabled": false,
+      "domain": "switch",
+      "service": "turn_on",
+      "areaId": [],
+      "deviceId": [
+        "f7ea2cf0296856a34d24651736213d8f"
+      ],
+      "entityId": [],
+      "data": "",
+      "dataType": "jsonata",
+      "mergeContext": "",
+      "mustacheAltTags": false,
+      "outputProperties": [],
+      "queue": "none",
+      "x": 1400,
+      "y": 180,
+      "wires": [
+        [
+          "db8df23c89dbc7c5"
+        ]
+      ]
+    },
+    {
+      "id": "fd19f47c8c885dcd",
+      "type": "api-call-service",
+      "z": "698fb647977d2c05",
+      "name": "NotifyStarted",
+      "server": "",
+      "version": 5,
+      "debugenabled": false,
+      "domain": "telegram_bot",
+      "service": "send_message",
+      "areaId": [],
+      "deviceId": [],
+      "entityId": [],
+      "data": "{\t   \"message\":\"👕 Maquina de lavar iniciada, previsão de conclusão em 1h40m horas\",\t   \"target\":\"-1001686169275\"\t}",
+      "dataType": "jsonata",
+      "mergeContext": "",
+      "mustacheAltTags": false,
+      "outputProperties": [],
+      "queue": "none",
+      "x": 1350,
+      "y": 100,
+      "wires": [
+        []
+      ]
+    },
+    {
+      "id": "db8df23c89dbc7c5",
+      "type": "stoptimer",
+      "z": "698fb647977d2c05",
+      "duration": "100",
+      "units": "Minute",
+      "payloadtype": "num",
+      "payloadval": "0",
+      "name": "Washing Cycle Timer",
+      "x": 1620,
+      "y": 180,
+      "wires": [
+        [
+          "2bdacd2d39ebb114",
+          "1e033d779fc348cf"
+        ],
+        []
+      ]
+    },
+    {
+      "id": "2bdacd2d39ebb114",
+      "type": "api-call-service",
+      "z": "698fb647977d2c05",
+      "name": "TurnOffMachine",
+      "server": "",
+      "version": 5,
+      "debugenabled": false,
+      "domain": "switch",
+      "service": "turn_off",
+      "areaId": [],
+      "deviceId": [
+        "f7ea2cf0296856a34d24651736213d8f"
+      ],
+      "entityId": [],
+      "data": "",
+      "dataType": "jsonata",
+      "mergeContext": "",
+      "mustacheAltTags": false,
+      "outputProperties": [],
+      "queue": "none",
+      "x": 1840,
+      "y": 180,
+      "wires": [
+        [
+          "26306c73ceba2ccd",
+          "9aa53efc030b6627"
+        ]
+      ]
+    },
+    {
+      "id": "26306c73ceba2ccd",
+      "type": "api-call-service",
+      "z": "698fb647977d2c05",
+      "name": "Notify Finished",
+      "server": "",
+      "version": 5,
+      "debugenabled": false,
+      "domain": "telegram_bot",
+      "service": "send_message",
+      "areaId": [],
+      "deviceId": [],
+      "entityId": [],
+      "data": "{\t   \"message\":\"👕 Maquina de lavar concluida!\",\t   \"target\":\"-1001686169275\"\t}",
+      "dataType": "jsonata",
+      "mergeContext": "",
+      "mustacheAltTags": false,
+      "outputProperties": [],
+      "queue": "none",
+      "x": 2040,
+      "y": 180,
+      "wires": [
+        []
+      ]
+    },
+    {
+      "id": "72ab6c8537b0a7d1",
+      "type": "debug",
+      "z": "698fb647977d2c05",
+      "d": true,
+      "name": "",
+      "active": true,
+      "tosidebar": true,
+      "console": false,
+      "tostatus": false,
+      "complete": "payload",
+      "targetType": "msg",
+      "statusVal": "",
+      "statusType": "auto",
+      "x": 930,
+      "y": 300,
+      "wires": []
+    },
+    {
+      "id": "f0473eb762f45c75",
+      "type": "inject",
+      "z": "698fb647977d2c05",
+      "name": "Prediction Updater Trigger",
+      "props": [
+        {
+          "p": "payload"
+        },
+        {
+          "p": "topic",
+          "vt": "str"
+        }
+      ],
+      "repeat": "3600",
+      "crontab": "",
+      "once": true,
+      "onceDelay": "5",
+      "topic": "",
+      "payload": "",
+      "payloadType": "date",
+      "x": 180,
+      "y": 480,
+      "wires": [
+        [
+          "2b455d2bc0c75a70"
+        ]
+      ]
+    },
+    {
+      "id": "1b2b2e4984a67ccd",
+      "type": "api-current-state",
+      "z": "698fb647977d2c05",
+      "name": "Weather Forecast",
+      "server": "",
+      "version": 3,
+      "outputs": 1,
+      "halt_if": "",
+      "halt_if_type": "str",
+      "halt_if_compare": "is",
+      "entity_id": "weather.daily_weather",
+      "state_type": "str",
+      "blockInputOverrides": false,
+      "outputProperties": [
+        {
+          "property": "payload",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "entityState"
+        },
+        {
+          "property": "data",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "entity"
+        }
+      ],
+      "for": "0",
+      "forType": "num",
+      "forUnits": "minutes",
+      "override_topic": false,
+      "state_location": "payload",
+      "override_payload": "msg",
+      "entity_location": "data",
+      "override_data": "msg",
+      "x": 730,
+      "y": 460,
+      "wires": [
+        [
+          "955d9d3a3d619125"
+        ]
+      ]
+    },
+    {
+      "id": "955d9d3a3d619125",
+      "type": "switch",
+      "z": "698fb647977d2c05",
+      "name": "Will Rain?",
+      "property": "data.attributes.forecast[0].condition",
+      "propertyType": "msg",
+      "rules": [
+        {
+          "t": "cont",
+          "v": "rain",
+          "vt": "str"
+        },
+        {
+          "t": "else"
+        }
+      ],
+      "checkall": "false",
+      "repair": false,
+      "outputs": 2,
+      "x": 920,
+      "y": 460,
+      "wires": [
+        [
+          "23a31fce1a2503ad"
+        ],
+        [
+          "aa3caeb95c54e3e0"
+        ]
+      ]
+    },
+    {
+      "id": "2196388ae1ba49fa",
+      "type": "ha-entity",
+      "z": "698fb647977d2c05",
+      "name": "Will Run on Next Cycle",
+      "server": "",
+      "version": 2,
+      "debugenabled": false,
+      "outputs": 1,
+      "entityType": "sensor",
+      "config": [
+        {
+          "property": "name",
+          "value": "Will Trigger Washing Machine Next Cycle"
+        },
+        {
+          "property": "device_class",
+          "value": ""
+        },
+        {
+          "property": "icon",
+          "value": ""
+        },
+        {
+          "property": "unit_of_measurement",
+          "value": ""
+        },
+        {
+          "property": "state_class",
+          "value": ""
+        },
+        {
+          "property": "last_reset",
+          "value": ""
+        }
+      ],
+      "state": "payload",
+      "stateType": "msg",
+      "attributes": [],
+      "resend": true,
+      "outputLocation": "payload",
+      "outputLocationType": "none",
+      "inputOverride": "allow",
+      "outputOnStateChange": false,
+      "outputPayload": "",
+      "outputPayloadType": "str",
+      "x": 1300,
+      "y": 460,
+      "wires": [
+        []
+      ]
+    },
+    {
+      "id": "aa3caeb95c54e3e0",
+      "type": "change",
+      "z": "698fb647977d2c05",
+      "name": "Set Yes",
+      "rules": [
+        {
+          "t": "set",
+          "p": "payload",
+          "pt": "msg",
+          "to": "Will Run",
+          "tot": "str"
+        }
+      ],
+      "action": "",
+      "property": "",
+      "from": "",
+      "to": "",
+      "reg": false,
+      "x": 1080,
+      "y": 500,
+      "wires": [
+        [
+          "2196388ae1ba49fa"
+        ]
+      ]
+    },
+    {
+      "id": "23a31fce1a2503ad",
+      "type": "change",
+      "z": "698fb647977d2c05",
+      "name": "Set No",
+      "rules": [
+        {
+          "t": "set",
+          "p": "payload",
+          "pt": "msg",
+          "to": "Won't Run (Bad Weather)",
+          "tot": "str"
+        }
+      ],
+      "action": "",
+      "property": "",
+      "from": "",
+      "to": "",
+      "reg": false,
+      "x": 1070,
+      "y": 420,
+      "wires": [
+        [
+          "2196388ae1ba49fa"
+        ]
+      ]
+    },
+    {
+      "id": "2b455d2bc0c75a70",
+      "type": "api-current-state",
+      "z": "698fb647977d2c05",
+      "name": "Arm State",
+      "server": "",
+      "version": 3,
+      "outputs": 1,
+      "halt_if": "",
+      "halt_if_type": "str",
+      "halt_if_compare": "is",
+      "entity_id": "input_boolean.washing_machine_arm",
+      "state_type": "str",
+      "blockInputOverrides": false,
+      "outputProperties": [
+        {
+          "property": "payload",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "entityState"
+        },
+        {
+          "property": "data",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "entity"
+        }
+      ],
+      "for": "0",
+      "forType": "num",
+      "forUnits": "minutes",
+      "override_topic": false,
+      "state_location": "payload",
+      "override_payload": "msg",
+      "entity_location": "data",
+      "override_data": "msg",
+      "x": 400,
+      "y": 480,
+      "wires": [
+        [
+          "23245750e60c6f72"
+        ]
+      ]
+    },
+    {
+      "id": "23245750e60c6f72",
+      "type": "switch",
+      "z": "698fb647977d2c05",
+      "name": "Is Armed",
+      "property": "payload",
+      "propertyType": "msg",
+      "rules": [
+        {
+          "t": "eq",
+          "v": "on",
+          "vt": "str"
+        },
+        {
+          "t": "else"
+        }
+      ],
+      "checkall": "false",
+      "repair": false,
+      "outputs": 2,
+      "x": 540,
+      "y": 480,
+      "wires": [
+        [
+          "1b2b2e4984a67ccd"
+        ],
+        [
+          "f60763a4394473d7"
+        ]
+      ]
+    },
+    {
+      "id": "f60763a4394473d7",
+      "type": "change",
+      "z": "698fb647977d2c05",
+      "name": "Set No",
+      "rules": [
+        {
+          "t": "set",
+          "p": "payload",
+          "pt": "msg",
+          "to": "Not Armed",
+          "tot": "str"
+        }
+      ],
+      "action": "",
+      "property": "",
+      "from": "",
+      "to": "",
+      "reg": false,
+      "x": 690,
+      "y": 540,
+      "wires": [
+        [
+          "2196388ae1ba49fa"
+        ]
+      ]
+    },
+    {
+      "id": "a022e7b97e0ef7f4",
+      "type": "server-state-changed",
+      "z": "698fb647977d2c05",
+      "name": "Machine Arm Update Prediction",
+      "server": "",
+      "version": 4,
+      "exposeToHomeAssistant": false,
+      "haConfig": [
+        {
+          "property": "name",
+          "value": ""
+        },
+        {
+          "property": "icon",
+          "value": ""
+        }
+      ],
+      "entityidfilter": "input_boolean.washing_machine_arm",
+      "entityidfiltertype": "exact",
+      "outputinitially": false,
+      "state_type": "str",
+      "haltifstate": "",
+      "halt_if_type": "str",
+      "halt_if_compare": "is",
+      "outputs": 1,
+      "output_only_on_state_change": true,
+      "for": "0",
+      "forType": "num",
+      "forUnits": "minutes",
+      "ignorePrevStateNull": true,
+      "ignorePrevStateUnknown": true,
+      "ignorePrevStateUnavailable": true,
+      "ignoreCurrentStateUnknown": true,
+      "ignoreCurrentStateUnavailable": true,
+      "outputProperties": [
+        {
+          "property": "payload",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "entityState"
+        },
+        {
+          "property": "data",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "eventData"
+        },
+        {
+          "property": "topic",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "triggerId"
+        }
+      ],
+      "x": 170,
+      "y": 420,
+      "wires": [
+        [
+          "2b455d2bc0c75a70",
+          "61b386818cd04805"
+        ]
+      ]
+    },
+    {
+      "id": "61b386818cd04805",
+      "type": "switch",
+      "z": "698fb647977d2c05",
+      "name": "Is Armed",
+      "property": "payload",
+      "propertyType": "msg",
+      "rules": [
+        {
+          "t": "eq",
+          "v": "on",
+          "vt": "str"
+        }
+      ],
+      "checkall": "false",
+      "repair": false,
+      "outputs": 1,
+      "x": 420,
+      "y": 400,
+      "wires": [
+        [
+          "03a82191baeb7181"
+        ]
+      ]
+    },
+    {
+      "id": "03a82191baeb7181",
+      "type": "api-call-service",
+      "z": "698fb647977d2c05",
+      "name": "NotifyArmed",
+      "server": "",
+      "version": 5,
+      "debugenabled": false,
+      "domain": "telegram_bot",
+      "service": "send_message",
+      "areaId": [],
+      "deviceId": [],
+      "entityId": [],
+      "data": "{\t   \"message\":\"✅ Maquina de lavar está preparada\",\t   \"target\": \"-1001686169275\"\t}",
+      "dataType": "jsonata",
+      "mergeContext": "",
+      "mustacheAltTags": false,
+      "outputProperties": [],
+      "queue": "none",
+      "x": 570,
+      "y": 400,
+      "wires": [
+        []
+      ]
+    },
+    {
+      "id": "04f66c0207be1050",
+      "type": "inject",
+      "z": "698fb647977d2c05",
+      "name": "Set to Dry Reminder",
+      "props": [
+        {
+          "p": "payload"
+        },
+        {
+          "p": "topic",
+          "vt": "str"
+        }
+      ],
+      "repeat": "",
+      "crontab": "0 12-21 * * *",
+      "once": true,
+      "onceDelay": "5",
+      "topic": "",
+      "payload": "",
+      "payloadType": "date",
+      "x": 140,
+      "y": 640,
+      "wires": [
+        [
+          "89c5af00b4fc9a18"
+        ]
+      ]
+    },
+    {
+      "id": "89c5af00b4fc9a18",
+      "type": "api-current-state",
+      "z": "698fb647977d2c05",
+      "name": "Ready to Dry",
+      "server": "",
+      "version": 3,
+      "outputs": 1,
+      "halt_if": "",
+      "halt_if_type": "str",
+      "halt_if_compare": "is",
+      "entity_id": "input_boolean.clothes_ready_to_dry",
+      "state_type": "str",
+      "blockInputOverrides": false,
+      "outputProperties": [
+        {
+          "property": "payload",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "entityState"
+        },
+        {
+          "property": "data",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "entity"
+        }
+      ],
+      "for": "0",
+      "forType": "num",
+      "forUnits": "minutes",
+      "override_topic": false,
+      "state_location": "payload",
+      "override_payload": "msg",
+      "entity_location": "data",
+      "override_data": "msg",
+      "x": 330,
+      "y": 640,
+      "wires": [
+        [
+          "bf118fd97ab8b940"
+        ]
+      ]
+    },
+    {
+      "id": "bf118fd97ab8b940",
+      "type": "switch",
+      "z": "698fb647977d2c05",
+      "name": "Is Ready to Dry",
+      "property": "payload",
+      "propertyType": "msg",
+      "rules": [
+        {
+          "t": "eq",
+          "v": "on",
+          "vt": "str"
+        },
+        {
+          "t": "else"
+        }
+      ],
+      "checkall": "false",
+      "repair": false,
+      "outputs": 2,
+      "x": 520,
+      "y": 640,
+      "wires": [
+        [
+          "26c1f4fbc5f61877"
+        ],
+        []
+      ]
+    },
+    {
+      "id": "26c1f4fbc5f61877",
+      "type": "api-call-service",
+      "z": "698fb647977d2c05",
+      "name": "Ready Reminder",
+      "server": "",
+      "version": 5,
+      "debugenabled": false,
+      "domain": "telegram_bot",
+      "service": "send_message",
+      "areaId": [],
+      "deviceId": [],
+      "entityId": [],
+      "data": "{\t   \"message\":\"☀️ A roupa ainda não foi pendurada\",\t   \"target\": \"-1001686169275\"\t}",
+      "dataType": "jsonata",
+      "mergeContext": "",
+      "mustacheAltTags": false,
+      "outputProperties": [],
+      "queue": "none",
+      "x": 750,
+      "y": 640,
+      "wires": [
+        []
+      ]
+    },
+    {
+      "id": "1e033d779fc348cf",
+      "type": "api-call-service",
+      "z": "698fb647977d2c05",
+      "name": "Set Ready to Dry",
+      "server": "",
+      "version": 5,
+      "debugenabled": false,
+      "domain": "input_boolean",
+      "service": "turn_on",
+      "areaId": [],
+      "deviceId": [],
+      "entityId": [
+        "input_boolean.clothes_ready_to_dry"
+      ],
+      "data": "",
+      "dataType": "jsonata",
+      "mergeContext": "",
+      "mustacheAltTags": false,
+      "outputProperties": [],
+      "queue": "none",
+      "x": 1850,
+      "y": 240,
+      "wires": [
+        []
+      ]
+    },
+    {
+      "id": "c3c5eaefa047b45f",
+      "type": "inject",
+      "z": "698fb647977d2c05",
+      "name": "Morning Trigger (Weekend)",
+      "props": [
+        {
+          "p": "payload"
+        },
+        {
+          "p": "topic",
+          "vt": "str"
+        }
+      ],
+      "repeat": "",
+      "crontab": "59 11 * * 6,0",
+      "once": false,
+      "onceDelay": 0.1,
+      "topic": "",
+      "payload": "",
+      "payloadType": "date",
+      "x": 160,
+      "y": 120,
+      "wires": [
+        [
+          "e0a65010a009fbf3"
+        ]
+      ]
+    },
+    {
+      "id": "bfb31486d1131f2d",
+      "type": "ha-button",
+      "z": "698fb647977d2c05",
+      "name": "Washing Machine Manual Start",
+      "version": 0,
+      "debugenabled": false,
+      "outputs": 1,
+      "entityConfig": "f2a0fce18940b993",
+      "outputProperties": [
+        {
+          "property": "payload",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "entityState"
+        },
+        {
+          "property": "topic",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "triggerId"
+        },
+        {
+          "property": "data",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "entity"
+        }
+      ],
+      "x": 150,
+      "y": 200,
+      "wires": [
+        [
+          "e0a65010a009fbf3"
+        ]
+      ]
+    },
+    {
+      "id": "9aa53efc030b6627",
+      "type": "api-call-service",
+      "z": "698fb647977d2c05",
+      "name": "Notify Alexa",
+      "server": "",
+      "version": 5,
+      "debugenabled": false,
+      "domain": "notify",
+      "service": "alexa_media_last_called",
+      "areaId": [],
+      "deviceId": [],
+      "entityId": [],
+      "data": "{\t  \"message\": \"Washing machine has finished\",\t  \"data\": {\t    \"type\": \"announce\"\t  }\t}",
+      "dataType": "jsonata",
+      "mergeContext": "",
+      "mustacheAltTags": false,
+      "outputProperties": [],
+      "queue": "none",
+      "x": 2050,
+      "y": 240,
+      "wires": [
+        []
+      ]
+    },
+    {
+      "id": "6905ebcf6499d21c",
+      "type": "inject",
+      "z": "698fb647977d2c05",
+      "name": "Mark Finished",
+      "props": [
+        {
+          "p": "payload"
+        },
+        {
+          "p": "topic",
+          "vt": "str"
+        }
+      ],
+      "repeat": "",
+      "crontab": "",
+      "once": false,
+      "onceDelay": 0.1,
+      "topic": "",
+      "payload": "",
+      "payloadType": "date",
+      "x": 1590,
+      "y": 300,
+      "wires": [
+        [
+          "2bdacd2d39ebb114",
+          "1e033d779fc348cf"
+        ]
+      ]
+    },
+    {
+      "id": "b491220c4ec0a7c5",
+      "type": "server-state-changed",
+      "z": "698fb647977d2c05",
+      "name": "Kitchen Door Opened",
+      "server": "",
+      "version": 4,
+      "exposeToHomeAssistant": false,
+      "haConfig": [
+        {
+          "property": "name",
+          "value": ""
+        },
+        {
+          "property": "icon",
+          "value": ""
+        }
+      ],
+      "entityidfilter": "binary_sensor.kitchen_door_contact",
+      "entityidfiltertype": "exact",
+      "outputinitially": false,
+      "state_type": "str",
+      "haltifstate": "on",
+      "halt_if_type": "str",
+      "halt_if_compare": "is",
+      "outputs": 2,
+      "output_only_on_state_change": true,
+      "for": "3",
+      "forType": "num",
+      "forUnits": "minutes",
+      "ignorePrevStateNull": false,
+      "ignorePrevStateUnknown": false,
+      "ignorePrevStateUnavailable": false,
+      "ignoreCurrentStateUnknown": false,
+      "ignoreCurrentStateUnavailable": false,
+      "outputProperties": [
+        {
+          "property": "payload",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "entityState"
+        },
+        {
+          "property": "data",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "eventData"
+        },
+        {
+          "property": "topic",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "triggerId"
+        }
+      ],
+      "x": 120,
+      "y": 780,
+      "wires": [
+        [
+          "28f1e094d80f1bc0"
+        ],
+        []
+      ]
+    },
+    {
+      "id": "28f1e094d80f1bc0",
+      "type": "api-current-state",
+      "z": "698fb647977d2c05",
+      "name": "Ready to Dry",
+      "server": "",
+      "version": 3,
+      "outputs": 1,
+      "halt_if": "",
+      "halt_if_type": "str",
+      "halt_if_compare": "is",
+      "entity_id": "input_boolean.clothes_ready_to_dry",
+      "state_type": "str",
+      "blockInputOverrides": false,
+      "outputProperties": [
+        {
+          "property": "payload",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "entityState"
+        },
+        {
+          "property": "data",
+          "propertyType": "msg",
+          "value": "",
+          "valueType": "entity"
+        }
+      ],
+      "for": "0",
+      "forType": "num",
+      "forUnits": "minutes",
+      "override_topic": false,
+      "state_location": "payload",
+      "override_payload": "msg",
+      "entity_location": "data",
+      "override_data": "msg",
+      "x": 350,
+      "y": 780,
+      "wires": [
+        [
+          "fbab1ad3d05e27eb"
+        ]
+      ]
+    },
+    {
+      "id": "fbab1ad3d05e27eb",
+      "type": "switch",
+      "z": "698fb647977d2c05",
+      "name": "Is Ready to Dry",
+      "property": "payload",
+      "propertyType": "msg",
+      "rules": [
+        {
+          "t": "eq",
+          "v": "on",
+          "vt": "str"
+        },
+        {
+          "t": "else"
+        }
+      ],
+      "checkall": "false",
+      "repair": false,
+      "outputs": 2,
+      "x": 540,
+      "y": 780,
+      "wires": [
+        [
+          "d888ea445d5d0532",
+          "b119601b9e1cdeb7",
+          "5031477009c9b313"
+        ],
+        []
+      ]
+    },
+    {
+      "id": "d888ea445d5d0532",
+      "type": "api-call-service",
+      "z": "698fb647977d2c05",
+      "name": "Disable Ready to Dry",
+      "server": "",
+      "version": 5,
+      "debugenabled": false,
+      "domain": "input_boolean",
+      "service": "turn_off",
+      "areaId": [],
+      "deviceId": [],
+      "entityId": [
+        "input_boolean.clothes_ready_to_dry"
+      ],
+      "data": "",
+      "dataType": "jsonata",
+      "mergeContext": "",
+      "mustacheAltTags": false,
+      "outputProperties": [],
+      "queue": "none",
+      "x": 780,
+      "y": 740,
+      "wires": [
+        []
+      ]
+    },
+    {
+      "id": "b119601b9e1cdeb7",
+      "type": "api-call-service",
+      "z": "698fb647977d2c05",
+      "name": "Notify Finished",
+      "server": "",
+      "version": 5,
+      "debugenabled": false,
+      "domain": "telegram_bot",
+      "service": "send_message",
+      "areaId": [],
+      "deviceId": [],
+      "entityId": [],
+      "data": "{\t   \"message\":\"👕 Porta da varanda aberta por mais de 3 minutos, roupa marcada como estendida\",\t   \"target\":\"-1001686169275\"\t}",
+      "dataType": "jsonata",
+      "mergeContext": "",
+      "mustacheAltTags": false,
+      "outputProperties": [],
+      "queue": "none",
+      "x": 760,
+      "y": 780,
+      "wires": [
+        []
+      ]
+    },
+    {
+      "id": "5031477009c9b313",
+      "type": "api-call-service",
+      "z": "698fb647977d2c05",
+      "name": "Notify Alexa",
+      "server": "",
+      "version": 5,
+      "debugenabled": false,
+      "domain": "notify",
+      "service": "alexa_media_last_called",
+      "areaId": [],
+      "deviceId": [],
+      "entityId": [],
+      "data": "{\t  \"message\": \"Clothes were automatically marked as finished\",\t  \"data\": {\t    \"type\": \"announce\"\t  }\t}",
+      "dataType": "jsonata",
+      "mergeContext": "",
+      "mustacheAltTags": false,
+      "outputProperties": [],
+      "queue": "none",
+      "x": 730,
+      "y": 840,
+      "wires": [
+        []
+      ]
+    },
+    {
+      "id": "f2a0fce18940b993",
+      "type": "ha-entity-config",
+      "server": "c502d9b9.4b9a68",
+      "name": "Washing Machine Manual Start",
+      "version": 2,
+      "haConfig": [
+        {
+          "property": "name",
+          "value": "Washing Machine Manual Start"
+        },
+        {
+          "property": "icon",
+          "value": ""
+        },
+        {
+          "property": "device_class",
+          "value": ""
+        }
+      ],
+      "entityType": "button"
+    }
+  ]
