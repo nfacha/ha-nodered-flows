@@ -1,0 +1,25 @@
+[
+  {
+    "id": "df51431e63723456",
+    "type": "http request",
+    "z": "50bb03b3f1c3f761",
+    "name": "dump1090Rx",
+    "method": "GET",
+    "ret": "txt",
+    "paytoqs": "ignore",
+    "url": "http://10.0.3.20:8080/data/aircraft.json",
+    "tls": "",
+    "persist": false,
+    "proxy": "",
+    "authType": "",
+    "senderr": false,
+    "credentials": {},
+    "x": 360,
+    "y": 120,
+    "wires": [
+      [
+        "9646e5980c44f74d"
+      ]
+    ]
+  }
+]
